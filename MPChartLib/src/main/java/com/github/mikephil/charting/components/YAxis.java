@@ -58,6 +58,15 @@ public class YAxis extends AxisBase {
      */
     protected float mSpacePercentBottom = 10f;
 
+
+    /**
+     * Data min and max values so that the user
+     * can select to only show these on the axis
+     */
+    private float mDataMin = 0.f;
+    private float mDataMax = 0.f;
+
+
     /**
      * the position of the y-labels relative to the chart
      */
@@ -364,6 +373,11 @@ public class YAxis extends AxisBase {
         float min = mCustomAxisMin ? mAxisMinimum : dataMin;
         float max = mCustomAxisMax ? mAxisMaximum : dataMax;
 
+        if (showOnlyMinMaxValues) {
+            mEntries = new float[2];
+            mEntries[0] = dataMin;
+            mEntries[1] = dataMax;
+        }
         // temporary range (before calculations)
         float range = Math.abs(max - min);
 

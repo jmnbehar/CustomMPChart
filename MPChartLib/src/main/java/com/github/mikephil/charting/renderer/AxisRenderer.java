@@ -148,6 +148,12 @@ public abstract class AxisRenderer extends Renderer {
      */
     protected void computeAxisValues(float min, float max) {
 
+        if (mAxis.showOnlyMinMaxValues) {
+            mAxis.mCenteredEntries = new float[]{};
+            mAxis.mEntryCount = 2;
+            return;
+        }
+
         float yMin = min;
         float yMax = max;
 

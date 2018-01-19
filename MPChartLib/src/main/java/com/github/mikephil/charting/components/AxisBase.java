@@ -33,6 +33,12 @@ public abstract class AxisBase extends ComponentBase {
     private float mAxisLineWidth = 1f;
 
     /**
+     * only show axis labels for the min and max
+     * y values of data points
+     */
+    public boolean showOnlyMinMaxValues = false;
+
+    /**
      * the actual array of entries
      */
     public float[] mEntries = new float[]{};
