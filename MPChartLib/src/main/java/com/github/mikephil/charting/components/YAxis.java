@@ -59,12 +59,6 @@ public class YAxis extends AxisBase {
     protected float mSpacePercentBottom = 10f;
 
 
-    /**
-     * Data min and max values so that the user
-     * can select to only show these on the axis
-     */
-    private float mDataMin = 0.f;
-    private float mDataMax = 0.f;
 
 
     /**
