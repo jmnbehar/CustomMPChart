@@ -12,6 +12,9 @@ import com.github.mikephil.charting.utils.Transformer;
 import com.github.mikephil.charting.utils.Utils;
 import com.github.mikephil.charting.utils.ViewPortHandler;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Baseclass of all axis renderers.
  *
@@ -141,6 +144,37 @@ public abstract class AxisRenderer extends Renderer {
         computeAxisValues(min, max);
     }
 
+    private void addUserSpecifiedLabels(float min, float max) {
+        float[] generatedLabels = mAxis.mEntries;
+        float[] specifiedLabels = mAxis.mUserSpecifiedLabels;
+        if (specifiedLabels.length > 0) {
+            float[] allLabels;
+            if (mAxis.mForceUserSpecifiedLabels) {
+                allLabels = Arrays.copyOf(generatedLabels, generatedLabels.length + specifiedLabels.length);
+                System.arraycopy(specifiedLabels, 0, allLabels, generatedLabels.length, specifiedLabels.length);
+            } else {
+                allLabels = generatedLabels;
+                float onePercent = (max - min) / 100;
+                for (float label : specifiedLabels) {
+                    Boolean acceptable = true;
+                    for (float acceptedLabel : allLabels) {
+                        if ((label >= acceptedLabel) && (label < (acceptedLabel + (3 * onePercent)))) {
+                            acceptable = false;
+                        } else if ((label <= acceptedLabel) && (label > (acceptedLabel - (3 * onePercent)))) {
+                            acceptable = false;
+                        }
+                    }
+                    if (acceptable) {
+                        //TODO: do this better
+                        allLabels = Arrays.copyOf(generatedLabels, generatedLabels.length + 1);
+                        allLabels[allLabels.length - 1] = label;
+                    }
+                }
+            }
+            mAxis.mEntries = allLabels;
+        }
+    }
+
     /**
      * Sets up the axis values. Computes the desired number of labels between the two given extremes.
      *
@@ -150,7 +184,8 @@ public abstract class AxisRenderer extends Renderer {
 
         if (mAxis.showOnlyMinMaxValues) {
             mAxis.mCenteredEntries = new float[]{};
-            mAxis.mEntryCount = 2;
+            addUserSpecifiedLabels(min, max);
+            mAxis.mEntryCount = mAxis.mEntries.length;
             return;
         }
 
@@ -240,6 +275,8 @@ public abstract class AxisRenderer extends Renderer {
 
                 mAxis.mEntries[i] = (float) f;
             }
+
+            addUserSpecifiedLabels(min, max);
         }
 
         // set decimals

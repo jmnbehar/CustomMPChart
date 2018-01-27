@@ -130,13 +130,12 @@ public class YAxisRenderer extends AxisRenderer {
 
             int margin = 3;
             float yPosition = positions[i * 2 + 1] + offset;
-            Float centerX = mViewPortHandler.getContentCenter().getX();
-            Boolean isLeftAxis = fixedPosition < centerX;
+            AxisDependency axisSide = mYAxis.getAxisDependency();
             Boolean isInsideChart = mYAxis.getLabelPosition() == YAxisLabelPosition.INSIDE_CHART;
-            if ((isLeftAxis && isInsideChart) || (!isLeftAxis && !isInsideChart)) {
+            if (((axisSide == AxisDependency.LEFT) && isInsideChart) || ((axisSide == AxisDependency.RIGHT) && !isInsideChart)) {
                 c.drawRoundRect(fixedPosition - (2 * margin), yPosition + fm.top - margin, fixedPosition + mAxisLabelPaint.measureText(text) + (2 * margin),
                         yPosition + fm.bottom + margin, 5.0f, 5.0f, mAxisLabelPaint);
-            } else if ((isLeftAxis && !isInsideChart) || (!isLeftAxis && isInsideChart)) {
+            } else {
                 c.drawRoundRect(fixedPosition - mAxisLabelPaint.measureText(text) - (2 * margin), yPosition + fm.top - margin, fixedPosition + (2 * margin),
                         yPosition + fm.bottom + margin, 5.0f, 5.0f, mAxisLabelPaint);
             }

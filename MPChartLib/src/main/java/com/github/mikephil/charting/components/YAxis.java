@@ -58,9 +58,6 @@ public class YAxis extends AxisBase {
      */
     protected float mSpacePercentBottom = 10f;
 
-
-
-
     /**
      * the position of the y-labels relative to the chart
      */
