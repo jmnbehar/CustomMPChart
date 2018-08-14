@@ -123,8 +123,27 @@ public class YAxisRenderer extends AxisRenderer {
         for (int i = from; i < to; i++) {
 
             String text = mYAxis.getFormattedLabel(i);
+            Paint.FontMetrics fm = mAxisLabelPaint.getFontMetrics();
 
-            c.drawText(text, fixedPosition, positions[i * 2 + 1] + offset, mAxisLabelPaint);
+            mAxisLabelPaint.setColor(Color.WHITE);
+            mAxisLabelPaint.setAlpha(220);
+
+            int margin = 3;
+            float yPosition = positions[i * 2 + 1] + offset;
+            AxisDependency axisSide = mYAxis.getAxisDependency();
+            Boolean isInsideChart = mYAxis.getLabelPosition() == YAxisLabelPosition.INSIDE_CHART;
+            if (((axisSide == AxisDependency.LEFT) && isInsideChart) || ((axisSide == AxisDependency.RIGHT) && !isInsideChart)) {
+                c.drawRoundRect(fixedPosition - (2 * margin), yPosition + fm.top - margin, fixedPosition + mAxisLabelPaint.measureText(text) + (2 * margin),
+                        yPosition + fm.bottom + margin, 5.0f, 5.0f, mAxisLabelPaint);
+            } else {
+                c.drawRoundRect(fixedPosition - mAxisLabelPaint.measureText(text) - (2 * margin), yPosition + fm.top - margin, fixedPosition + (2 * margin),
+                        yPosition + fm.bottom + margin, 5.0f, 5.0f, mAxisLabelPaint);
+            }
+
+            mAxisLabelPaint.setColor(Color.BLACK);
+            mAxisLabelPaint.setAlpha(255);
+
+            c.drawText(text, fixedPosition, yPosition, mAxisLabelPaint);
         }
     }
 

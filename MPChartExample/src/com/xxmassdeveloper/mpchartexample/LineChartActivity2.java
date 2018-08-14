@@ -107,10 +107,14 @@ public class LineChartActivity2 extends DemoBase implements OnSeekBarChangeListe
         YAxis leftAxis = mChart.getAxisLeft();
         leftAxis.setTypeface(mTfLight);
         leftAxis.setTextColor(ColorTemplate.getHoloBlue());
-        leftAxis.setAxisMaximum(200f);
-        leftAxis.setAxisMinimum(0f);
+//        leftAxis.setAxisMaximum(200f);
+//        leftAxis.setAxisMinimum(0f);
         leftAxis.setDrawGridLines(true);
         leftAxis.setGranularityEnabled(true);
+        leftAxis.showOnlyMinMaxValues = true;
+        float[] specifyList = { 51.0f, 55f, 64.5f };
+        leftAxis.showSpecificLabels(specifyList, false);
+
 
         YAxis rightAxis = mChart.getAxisRight();
         rightAxis.setTypeface(mTfLight);

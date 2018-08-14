@@ -33,6 +33,22 @@ public abstract class AxisBase extends ComponentBase {
     private float mAxisLineWidth = 1f;
 
     /**
+     * only show axis labels for the min and max
+     * y values of data points
+     */
+    public boolean showOnlyMinMaxValues = false;
+
+    /**
+     * User specified labels
+     */
+    public float[] mUserSpecifiedLabels = new float[]{};
+
+    /**
+     * Whether or not to force showing userSpecifiedLabels
+     */
+    public Boolean mForceUserSpecifiedLabels = false;
+
+    /**
      * the actual array of entries
      */
     public float[] mEntries = new float[]{};
@@ -164,6 +180,16 @@ public abstract class AxisBase extends ComponentBase {
      */
     public void setDrawGridLines(boolean enabled) {
         mDrawGridLines = enabled;
+    }
+
+    /**
+     * Set this to true to enable drawing the grid lines for this axis.
+     *
+     * @param force
+     */
+    public void showSpecificLabels(float[] labels, Boolean force) {
+        mUserSpecifiedLabels = labels;
+        mForceUserSpecifiedLabels = force;
     }
 
     /**

@@ -364,6 +364,11 @@ public class YAxis extends AxisBase {
         float min = mCustomAxisMin ? mAxisMinimum : dataMin;
         float max = mCustomAxisMax ? mAxisMaximum : dataMax;
 
+        if (showOnlyMinMaxValues) {
+            mEntries = new float[2];
+            mEntries[0] = dataMin;
+            mEntries[1] = dataMax;
+        }
         // temporary range (before calculations)
         float range = Math.abs(max - min);
 
