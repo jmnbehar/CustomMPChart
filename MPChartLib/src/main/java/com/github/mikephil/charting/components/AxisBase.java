@@ -9,6 +9,7 @@ import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.Utils;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -508,11 +509,15 @@ public abstract class AxisBase extends ComponentBase {
     }
 
     public String getFormattedLabel(int index) {
-
-        if (index < 0 || index >= mEntries.length)
+        if (index < 0 || index >= mEntries.length) {
             return "";
-        else
+        } else if (mEntries[index] > 1) {
             return getValueFormatter().getFormattedValue(mEntries[index], this);
+        } else {
+            DecimalFormat df = new DecimalFormat();
+            df.setMaximumFractionDigits(4);
+            return df.format(mEntries[index]);
+        }
     }
 
     /**
