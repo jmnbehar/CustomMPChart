@@ -99,6 +99,20 @@ public class YAxis extends AxisBase {
      */
     protected float mMaxWidth = Float.POSITIVE_INFINITY;
 
+
+    public float mAxisTopEnd = 0f;
+
+    public boolean shouldOnlyDrawPartialAxis = false;
+
+    public void setDrawPartialAxis(float topEnd) {
+        shouldOnlyDrawPartialAxis = true;
+        mAxisTopEnd = topEnd;
+    }
+    public void setDrawFullAxis() {
+        shouldOnlyDrawPartialAxis = false;
+        mAxisTopEnd = 0f;
+    }
+
     /**
      * Enum that specifies the axis a DataSet should be plotted against, either LEFT or RIGHT.
      *

@@ -97,11 +97,19 @@ public class YAxisRenderer extends AxisRenderer {
         mAxisLinePaint.setColor(mYAxis.getAxisLineColor());
         mAxisLinePaint.setStrokeWidth(mYAxis.getAxisLineWidth());
 
+        float axisTop = mViewPortHandler.contentTop();
+
+        if (mYAxis.shouldOnlyDrawPartialAxis) {
+            float[] position = new float[] { 0f, mYAxis.mAxisTopEnd};
+            mTrans.pointValuesToPixel(position);
+            axisTop = position[1];
+        }
+
         if (mYAxis.getAxisDependency() == AxisDependency.LEFT) {
-            c.drawLine(mViewPortHandler.contentLeft(), mViewPortHandler.contentTop(), mViewPortHandler.contentLeft(),
+            c.drawLine(mViewPortHandler.contentLeft(), axisTop, mViewPortHandler.contentLeft(),
                     mViewPortHandler.contentBottom(), mAxisLinePaint);
         } else {
-            c.drawLine(mViewPortHandler.contentRight(), mViewPortHandler.contentTop(), mViewPortHandler.contentRight(),
+            c.drawLine(mViewPortHandler.contentRight(), axisTop, mViewPortHandler.contentRight(),
                     mViewPortHandler.contentBottom(), mAxisLinePaint);
         }
     }
