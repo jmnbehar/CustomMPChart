@@ -192,7 +192,7 @@ public class CombinedChartActivity extends DemoBase {
         ArrayList<CandleEntry> entries = new ArrayList<CandleEntry>();
 
         for (int index = 0; index < itemcount; index += 2)
-            entries.add(new CandleEntry(index + 1f, 90, 70, 85, 75f));
+            entries.add(new CandleEntry(index + 1f, 90, 70, 85, 0, 75f));
 
         CandleDataSet set = new CandleDataSet(entries, "Candle DataSet");
         set.setDecreasingColor(Color.rgb(142, 150, 175));

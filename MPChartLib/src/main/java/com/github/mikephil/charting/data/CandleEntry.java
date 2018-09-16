@@ -24,6 +24,9 @@ public class CandleEntry extends Entry {
     /** open value */
     private float mOpen = 0f;
 
+    /** volume value */
+    private float mVolume = 0f;
+
     /**
      * Constructor.
      * 
@@ -33,13 +36,14 @@ public class CandleEntry extends Entry {
      * @param open The open value
      * @param close The close value
      */
-    public CandleEntry(float x, float shadowH, float shadowL, float open, float close) {
+    public CandleEntry(float x, float shadowH, float shadowL, float open, float close, float volume) {
         super(x, (shadowH + shadowL) / 2f);
 
         this.mShadowHigh = shadowH;
         this.mShadowLow = shadowL;
         this.mOpen = open;
         this.mClose = close;
+        this.mVolume = volume;
     }
 
     /**
@@ -52,7 +56,7 @@ public class CandleEntry extends Entry {
      * @param close
      * @param data Spot for additional data this Entry represents
      */
-    public CandleEntry(float x, float shadowH, float shadowL, float open, float close,
+    public CandleEntry(float x, float shadowH, float shadowL, float open, float close, float volume,
                        Object data) {
         super(x, (shadowH + shadowL) / 2f, data);
 
@@ -60,6 +64,7 @@ public class CandleEntry extends Entry {
         this.mShadowLow = shadowL;
         this.mOpen = open;
         this.mClose = close;
+        this.mVolume = volume;
     }
 
     /**
@@ -72,7 +77,7 @@ public class CandleEntry extends Entry {
      * @param close
      * @param icon Icon image
      */
-    public CandleEntry(float x, float shadowH, float shadowL, float open, float close,
+    public CandleEntry(float x, float shadowH, float shadowL, float open, float close, float volume,
                        Drawable icon) {
         super(x, (shadowH + shadowL) / 2f, icon);
 
@@ -80,6 +85,7 @@ public class CandleEntry extends Entry {
         this.mShadowLow = shadowL;
         this.mOpen = open;
         this.mClose = close;
+        this.mVolume = volume;
     }
 
     /**
@@ -93,7 +99,7 @@ public class CandleEntry extends Entry {
      * @param icon Icon image
      * @param data Spot for additional data this Entry represents
      */
-    public CandleEntry(float x, float shadowH, float shadowL, float open, float close,
+    public CandleEntry(float x, float shadowH, float shadowL, float open, float close, float volume,
                        Drawable icon, Object data) {
         super(x, (shadowH + shadowL) / 2f, icon, data);
 
@@ -101,6 +107,7 @@ public class CandleEntry extends Entry {
         this.mShadowLow = shadowL;
         this.mOpen = open;
         this.mClose = close;
+        this.mVolume = volume;
     }
 
     /**
@@ -134,7 +141,7 @@ public class CandleEntry extends Entry {
     public CandleEntry copy() {
 
         CandleEntry c = new CandleEntry(getX(), mShadowHigh, mShadowLow, mOpen,
-                mClose, getData());
+                mClose, mVolume, getData());
 
         return c;
     }
@@ -189,5 +196,23 @@ public class CandleEntry extends Entry {
 
     public void setOpen(float mOpen) {
         this.mOpen = mOpen;
+    }
+
+    /**
+     * Returns the volume-value of this Entry object.
+     *
+     * @return
+     */
+    public float getVolume() {
+        return mVolume;
+    }
+
+    /**
+     * Sets the volume-value of this Entry object.
+     *
+     * @param volume
+     */
+    public void setVolume(float volume) {
+        this.mVolume = volume;
     }
 }

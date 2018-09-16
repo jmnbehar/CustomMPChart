@@ -19,6 +19,9 @@ public class Entry extends BaseEntry implements Parcelable {
     /** the x value */
     private float x = 0f;
 
+    /** volume value */
+    private float mVolume = 0f;
+
     public Entry() {
 
     }
@@ -33,6 +36,11 @@ public class Entry extends BaseEntry implements Parcelable {
         super(y);
         this.x = x;
     }
+    public Entry(float x, float y, float volume) {
+        super(y);
+        this.x = x;
+        this.mVolume = volume;
+    }
 
     /**
      * A Entry represents one single entry in the chart.
@@ -44,6 +52,19 @@ public class Entry extends BaseEntry implements Parcelable {
     public Entry(float x, float y, Object data) {
         super(y, data);
         this.x = x;
+    }
+
+    /**
+     * A Entry represents one single entry in the chart.
+     *
+     * @param x the x value
+     * @param y the y value (the actual value of the entry)
+     * @param data Spot for additional data this Entry represents.
+     */
+    public Entry(float x, float y, float volume, Object data) {
+        super(y, data);
+        this.x = x;
+        this.mVolume = volume;
     }
 
     /**
@@ -70,10 +91,15 @@ public class Entry extends BaseEntry implements Parcelable {
         super(y, icon, data);
         this.x = x;
     }
+    public Entry(float x, float y, float volume, Drawable icon, Object data) {
+        super(y, icon, data);
+        this.x = x;
+        this.mVolume = volume;
+    }
 
     /**
      * Returns the x-value of this Entry object.
-     * 
+     *
      * @return
      */
     public float getX() {
@@ -82,11 +108,30 @@ public class Entry extends BaseEntry implements Parcelable {
 
     /**
      * Sets the x-value of this Entry object.
-     * 
+     *
      * @param x
      */
     public void setX(float x) {
         this.x = x;
+    }
+
+
+    /**
+     * Returns the volume-value of this Entry object.
+     *
+     * @return
+     */
+    public float getVolume() {
+        return mVolume;
+    }
+
+    /**
+     * Sets the volume-value of this Entry object.
+     *
+     * @param volume
+     */
+    public void setVolume(float volume) {
+        this.mVolume = volume;
     }
 
     /**

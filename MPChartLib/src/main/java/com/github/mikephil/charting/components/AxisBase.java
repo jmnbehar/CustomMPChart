@@ -514,6 +514,7 @@ public abstract class AxisBase extends ComponentBase {
         } else if (mEntries[index] > 1) {
             return getValueFormatter().getFormattedValue(mEntries[index], this);
         } else {
+
             DecimalFormat df = new DecimalFormat();
             df.setMaximumFractionDigits(4);
             return df.format(mEntries[index]);

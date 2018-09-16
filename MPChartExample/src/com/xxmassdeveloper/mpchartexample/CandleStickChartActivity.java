@@ -191,6 +191,7 @@ public class CandleStickChartActivity extends DemoBase implements OnSeekBarChang
                     val - low,
                     even ? val + open : val - open,
                     even ? val - close : val + close,
+                    0,
                     getResources().getDrawable(R.drawable.star)
             ));
         }
